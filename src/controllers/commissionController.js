@@ -31,10 +31,10 @@ class CommissionController {
                 commissionMap[username].TOTAL_COMM += parseFloat(comm["TOTAL COMM"]);
             });
     
-            // Process each user who has a total commission >= 50
+            // Process each user who has a total commission >= 500
             for (const username in commissionMap) {
-                if (commissionMap[username].TOTAL_COMM >= 5) {
-                    const amountToDeduct = 2; // Amount to deduct from the commission
+                if (commissionMap[username].TOTAL_COMM >= 500) {
+                    const amountToDeduct = 100; // Amount to deduct from the commission
     
                     // Deduct the commission
                     const updatedTotalComm = commissionMap[username].TOTAL_COMM - amountToDeduct;

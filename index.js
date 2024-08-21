@@ -20,7 +20,7 @@ app.enable('trust proxy');
 app.use(routes);
 
 // Schedule the task to run every day at 11:59 PM
-cron.schedule('33 22 * * *', () => {
+cron.schedule('25 11 * * *', () => {
   console.log('Running the commission deduction task...');
  // deductCommission();
  deductCommission()
