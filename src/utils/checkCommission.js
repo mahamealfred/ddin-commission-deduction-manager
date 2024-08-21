@@ -3,6 +3,10 @@ const dbConnect = require("../db/config");
 
 const selectTotalAgentCommissionsGeneratedByDate=async()=>{
     const currentDate = new Date().toISOString().split('T')[0];
+    const dateObject = new Date(currentDate);
+   // Add one day (24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
+   dateObject.setDate(dateObject.getDate() + 1);
+  const nextDate = dateObject.toISOString().split('T')[0];
     const query = `
         SELECT t.date, aa.owner_name as 'USERNAME', mm.name as 'FULL NAME', coalesce((t.amount)) as 'TOTAL COMM'
         FROM transfers t
@@ -17,7 +21,7 @@ const selectTotalAgentCommissionsGeneratedByDate=async()=>{
     `;
 
     try {
-        const [results] = await dbConnect.query(query,['2024-08-01','2024-08-09']);
+        const [results] = await dbConnect.query(query,[currentDate,nextDate]);
         if (!results.length) {
             console.warn('No results found for the specified query.');
         }
